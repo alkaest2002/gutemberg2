@@ -1,0 +1,52 @@
+---
+######################################################################
+# META
+######################################################################
+
+document_title: Visita Imas
+
+document_base_folder: imas/visita
+
+document_filename: #document name#
+
+documenta_date: #document date#
+
+######################################################################
+# DATA
+######################################################################
+
+surname:
+  #surname#
+
+name:
+  #name#
+
+gender:
+  #gender#
+
+dob:
+  #dob#
+
+pob:
+  #pob#
+
+reason_for_visit:
+  #reason_for_visit#
+
+medical_history:
+  #medical_history#
+
+interview:
+  #interview#
+
+tests:
+  #tests#
+
+diagnosis:
+  #diagnoses#
+
+proposal:
+  #proposal#
+
+advice:
+  #advice#

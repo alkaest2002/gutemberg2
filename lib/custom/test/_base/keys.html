@@ -1,0 +1,67 @@
+{% extends "_base.html" %}
+
+{% block style %}
+<style>
+
+  #keys-title {
+    margin-bottom: 24pt;
+  }
+
+  #keys-table{
+    width: 50%;
+    margin: auto;
+  }
+
+  #keys-table th {
+    font-weight: bold;
+    padding: 6pt 0;
+    text-align: center;
+  }
+
+  #keys-table thead tr:first-child {
+    border-top: 2px solid #000;
+  }
+
+  #keys-table thead th {
+    background-color: #555;
+    color: white;
+  }
+
+  #keys-table tbody tr:last-child {
+    border-bottom: 2px solid #000;
+  }
+
+  #keys-table tr:nth-child(even) {
+    background-color: #ddd;
+  }
+
+  #keys-table td {
+    padding: 3pt 0;
+    text-align: center;
+  }
+
+</style>
+{% endblock %}
+
+{% block body %}
+  <div id="keys-title" class="text-center">
+    <h1>PRIMA PROVA SCRITTA</h1>
+    <h2>{{ booklet_name }}</h2>
+  </div>
+  <table id="keys-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Soluzione</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, value in booklet_items.iterrows() %}
+          <tr>
+            <td>item {{ loop.index }}</td>
+            <td>{{ value["correct"] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

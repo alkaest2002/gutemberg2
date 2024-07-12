@@ -1,0 +1,246 @@
+{% extends "concorsi/attitudinale/_base/_base.html" %} {% macro voto_hr(voto) %}
+{{
+["","uno","due","tre","quattro","cinque","sei","sette","otto","nove","dieci"][voto]
+}} {% endmacro %} {% macro voto_capo_gruppo_hr(voto) %} {{
+['','insufficiente','insufficiente','mediocre','mediocre','sufficiente','sufficiente','buono','buono','ottimo','ottimo'][voto]
+}} {% endmacro %} {% block style %} {{ super() }}
+<style>
+    #header td:nth-child(2),
+    #header td:nth-child(4) {
+        min-width: 25px;
+        border-bottom: 1px solid #444;
+        text-align: center;
+        padding: 0 3px;
+    }
+
+    #title {
+        margin-top: 12pt;
+    }
+
+    #subtitle > div {
+        font-size: 1.3em;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 1em auto;
+        border: 1px solid #444;
+        background-color: rgb(229, 229, 229);
+    }
+
+    #bio table {
+        width: 100%;
+        border: 1px solid #444;
+    }
+
+    #bio th {
+        font-size: 1.1em;
+        font-weight: bold;
+        background-color: rgb(229, 229, 229);
+        border: 1px solid #444;
+    }
+
+    #bio td {
+        padding: 3px 5px;
+    }
+
+    #bio td:nth-child(2) {
+        font-size: 1.1em;
+    }
+
+    #bio tr:last-child td:nth-child(4) {
+        font-size: 1.1em;
+    }
+
+    #assessment > div:first-child {
+        position: relative;
+        margin-top: 1em;
+        padding: 1.2em 1.4em;
+        width: 100%;
+        height: 470px;
+        border: 1px solid #444;
+        text-align: justify;
+        font-size: 1.1em;
+        line-height: 1.4em;
+    }
+
+    #score table {
+        margin-top: 1em;
+        width: 100%;
+    }
+
+    #score table td {
+        position: relative;
+        padding: 3px 6px;
+    }
+
+    #score table tr:first-child tdnot:first-child {
+        text-align: center;
+    }
+
+    #score td {
+        text-align: center;
+        border: 1px solid #444;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    #score td:first-child {
+        border: none;
+        font-weight: normal;
+    }
+
+    #score tr:first-child td:nth-child(2) {
+        font-weight: normal;
+        border: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .crossed {
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M1 0 L0 1 L99 100 L100 99' fill='black' fill-width='3'/><path d='M0 99 L99 0 L100 1 L1 100' fill='black' fill-width='3'/></svg>");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size:
+            100% 100%,
+            auto;
+    }
+
+    #footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24pt;
+    }
+
+    #footer > div:first-child {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #footer > div:last-child {
+        height: 60px;
+        margin-top: 2em;
+        border-bottom: 1px solid #000;
+    }
+</style>
+{% endblock %} {% block body %}
+<div class="page">
+    <section id="header">
+        <table>
+            <tr>
+                <td>NR.</td>
+                <td>{{ id_soggetto }}</td>
+                <td>/</td>
+                <td>{{ tirocinio|default(1) }}</td>
+            </tr>
+        </table>
+    </section>
+    <section id="title">
+        <h1 class="text-center" style="font-size: 1.2em">{{ concorso }}</h1>
+    </section>
+    <section id="subtitle">
+        <div>VERBALE GIUDIZIO ATTITUDINALE</div>
+    </section>
+    <section id="bio">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4" class="text-center">
+                        <span class="text-bold">DATI DEL CANDIDATO</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="150"><strong>COGNOME E NOME</strong></td>
+                    <td colspan="3">
+                        {{ cognome | upper }} {{ nome | upper }}
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>NATO A</strong></td>
+                    <td>{{ luogo_nascita | upper }}</td>
+                    <td><strong>IL</strong></td>
+                    <td>{{ data_nascita }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section id="assessment">
+        <div>
+            <div>
+                <em>== Curriculum scolastico e lavorativo ==</em> {{ curriculum
+                | safe }}&nbsp; <em>== Approccio al colloquio ==</em> {{
+                approccio_colloquio| safe }}&nbsp;
+                <em>== Linguaggio e pensiero ==</em> {{ linguaggio_pensiero|
+                safe }}&nbsp; <em>== Adattabilità e motivazione ==</em> {{
+                adattabilità_motivazione }}
+                <em>== Osservazioni conclusive ==</em> Avuto riguardo degli
+                esiti della conferenza ({{ altri_voti['conferenza'] }}), della
+                prova di gruppo ({{ altri_voti['prova_gruppo'] }}),
+                dell'intervista con il perito selettore ({{
+                altri_voti['colloquio_perito'] }}), delle risultanze al
+                questionario di personalità e tenuto conto di quanto emerso
+                durante il presente colloquio, ritengo che {% if gender == "F"
+                or gender == "f" %}la candidata{% else %}il candidato{% endif %}
+                in esame, {{ cognome }} {{ nome }}, possieda un profilo
+                attitudinale
+                <em
+                    >{{ voto_capo_gruppo_hr(voto_capo_gruppo_attitudinale)
+                    }}</em
+                >
+                (voto {{ voto_capo_gruppo_attitudinale|int }}/10). {% if
+                conclusioni %} {{ conclusioni }} {% endif%}
+            </div>
+        </div>
+    </section>
+    <section id="score">
+        <table>
+            <tr>
+                <td rowspan="2" class="padding-left:0">Giudizio conclusivo</td>
+                <td class="text-center">
+                    <em>{{ voto_hr(voto_capo_gruppo_attitudinale) }}</em>
+                </td>
+                <td colspan="2" style="background-color: rgb(229, 229, 229)">
+                    Insufficiente
+                </td>
+                <td colspan="2" style="background-color: rgb(218, 218, 218)">
+                    Mediocre
+                </td>
+                <td colspan="2" style="background-color: rgb(204, 204, 204)">
+                    Sufficiente
+                </td>
+                <td colspan="2" style="background-color: rgb(191, 191, 191)">
+                    Buono
+                </td>
+                <td colspan="2" style="background-color: rgb(178, 178, 178)">
+                    Ottimo
+                </td>
+            </tr>
+            <tr>
+                <td><span style="font-size: 0.8em">(in lettere)</span></td>
+                {% for i in range(1,11) %}
+                <td
+                    style="background-color: rgb(229, 229, 229); width: 45px"
+                    class="{{ 'crossed' if voto_capo_gruppo_attitudinale == i }}"
+                >
+                    {{ i }}
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+    </section>
+    <section id="footer">
+        <div>
+            <p style="width: 200px; border-bottom: 1px solid #000">
+                {{ luogo }}, {{ document_date }}
+            </p>
+            <p class="text-small text-italic">Luogo e data</p>
+        </div>
+        <div class="text-center">
+            <p class="text-bold" style="text-transform: uppercase">
+                Il Capo Gruppo Attitudinale
+            </p>
+            <em>Ten. Col. CSArs (Psy) Pierpaolo CALANNA</em>
+        </div>
+    </section>
+</div>
+{% endblock %}

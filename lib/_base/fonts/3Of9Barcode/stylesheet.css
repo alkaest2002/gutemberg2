@@ -1,0 +1,9 @@
+@font-face {
+    font-family: '3 of 9 Barcode';
+    src: url('3Of9Barcode.woff2') format('woff2'),
+        url('3Of9Barcode.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,12 @@
+{
+  "demo/json": {
+    "fixed_value": "fixed value from optional data file"
+  },
+  "imas/accertamenti": {},
+  "imas/visita": {},
+  "concorsi/attitudinale": {
+    "luogo": "Viterbo",
+    "concorso": "Concorso, per titoli ed esami, per l'ammissione al 26° corso Biennale (2023-2025)<br/>per Allievi Marescialli dell'Aeronautica Militare<br/>(M_D AB05933 REG2023 0208386 05-04-2023)",
+    "tirocinio": "TIR2"
+  }
+}

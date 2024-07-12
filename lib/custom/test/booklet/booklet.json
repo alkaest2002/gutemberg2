@@ -1,0 +1,32 @@
+[
+  {
+    "document_title": "Libretto test",
+    "document_base_folder": "test/booklet",
+    "document_filename": "document_filename",
+    "document_date": null,
+    "booklet_title": "booklet_title",
+    "booklet_length": 1,
+    "booklet_duration": "booklet_duration",
+    "booklet_likert": ["A", "B", "C", "D", "E"],
+    "scoring_correct_item": "scoring_correct_item",
+    "scoring_omitted_item": "scoring_omitted_item",
+    "scoring_incorrect_item": "scoring_incorrect_item",
+    "show_frontcover": true,
+    "show_instructions": true,
+    "show_correct_anwer": true,
+    "booklet_items": [
+      {
+        "area": "example area",
+        "topic": "example topic",
+        "item_id": 1,
+        "item_text": "item text",
+        "option_a": "option a",
+        "option_b": "option b",
+        "option_c": "option c",
+        "option_d": "option d",
+        "option_d": "option e",
+        "correct": "C"
+      }
+    ]
+  }
+]

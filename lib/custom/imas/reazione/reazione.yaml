@@ -1,0 +1,90 @@
+---
+######################################################################
+# META
+######################################################################
+
+document_title: Tempi di Reazione
+
+document_base_folder: imas/reazione
+
+document_filename: #document name#
+
+document_date: #document date#
+
+######################################################################
+# DATA
+######################################################################
+
+surname:
+  #surname#
+
+name:
+  #name#
+
+gender:
+  #gender#
+
+dob:
+  #dob#
+
+pob:
+  #pob#
+
+trials:
+  - trial: 1
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 2
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 3
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 4
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 5
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 6
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 7
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 8
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 9
+    eye: 0
+    ear: 0
+    complex: 0
+  - trial: 10
+    eye: 0
+    ear: 0
+    complex: 10
+
+results:
+  - type: Semlice (ottico)
+    rapidity_raw: 0
+    regularity_raw: 0
+    rapidity_std: I
+    regularity: I
+  - type: Semlice (acustico)
+    rapidity_raw: 0
+    regularity_raw: 0
+    rapidity_std: I
+    regularity: I
+  - type: Complesso
+    rapidity_raw: 0
+    regularity_raw: 0
+    rapidity_std: I
+    regularity: I

@@ -1,0 +1,58 @@
+---
+######################################################################
+# META
+######################################################################
+
+document_title: Richiesta accertamenti
+
+document_base_folder: imas/accertamenti
+
+document_filename: #document name#
+
+document_date: #document date#
+
+######################################################################
+# DATA
+######################################################################
+
+surname:
+  #surname#
+
+name:
+  #name#
+
+gender:
+  #gender#
+
+dob:
+  #dob#
+
+pob:
+  #pob#
+
+address:
+  #address#
+
+city:
+  #city#
+
+phone: !!str #phone#
+
+
+email:
+  #email#
+
+base_esxams:
+  - &medico certificato medico curante attestante il non uso di sostanze stupefacenti e il non abuso di alcool
+  - &terapia_in_corso relazione aggiornata della psicoterapia in corso
+  - &terapia_conclusa relazione di fine psicoterapia
+  - &assessment_psicologico assessment psicologico
+  - &tossicologico_completo screening tossicologico completo su matrice pilifera e urinaria
+  - &tossicologico_urine screening tossicologico su matrice urinaria
+  - &tossicologico_capello screening tossicologico su matrice pilifera
+  - &relazione_volo relazione di profitto redatta dalla scuola di volo su carta intestata
+  - &rapporto_comportamentale rapporto comportamentale del comandante di corpo
+
+exams:
+  -  #exams#
+  -  #exams#

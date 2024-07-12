@@ -1,0 +1,28 @@
+<div class="page" style="display: flex; justify-content: center; align-items: center;">
+    <div>
+        <h1 class="text-center text-bold" style="font-size: 24pt;">ISTRUZIONI</h1 >
+        <div style="padding:50px;padding-top:25px" class="text-justify">
+            <p style="margin-bottom:12pt">
+            La prova che ora sosterrete si compone di {{ booklet_length }} quesiti. Ciascun quesito
+            prevede {{ booklet_likert | length }} alternative di risposta ({{ booklet_likert | join(", ") }}), una e una sola delle quali è esatta.
+            </p>
+            <p style="margin-bottom:12pt">
+            Vi è stato consegnato un “foglio risposte” sul quale sono riportati i numeri delle domande seguiti
+            dalle lettere che contraddistinguono le soluzioni suggerite</u>.
+            </p>
+            <p style="margin-bottom:12pt">
+            Non è possibile indicare più di una alternativa per ciascun quesito, o correggere una risposta già
+            contrassegnata (verrebbe considerata comunque errata).
+            Qualsiasi segno apposto in corrispondenza delle caselle con le lettere delle risposte, anche se
+            accidentale, verrà considerato come intenzione di risposta.
+            </p>
+            <p style="margin-bottom:12pt">
+            Nel conteggio dei risultati, verrà attribuito {{ scoring_correct_item }} per ogni risposta esatta,
+            {{ scoring_incorrect_item }} per ogni risposta errata o multipla e {{ scoring_omitted_item }} per ogni risposta omessa.
+            </p>
+            <p style="margin-bottom:12pt">
+            Il tempo a disposizione per concludere il test è pari a {{ booklet_duration }}. Buon lavoro.
+            </p>
+        </div>
+    </div>
+</div>

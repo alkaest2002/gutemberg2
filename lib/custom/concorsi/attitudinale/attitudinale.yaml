@@ -1,0 +1,72 @@
+---
+######################################################################
+# META
+######################################################################
+
+document_title: Verbale Capo Gruppo Attitudinale
+
+document_base_folder: concorsi/attitudinale
+
+document_filename: #document name#
+
+document_date: #document date#
+
+######################################################################
+# DATA
+######################################################################
+
+luogo:
+  #luogo#
+
+data_documento:
+  #data_documento#
+
+concorso:
+  #concorso#
+
+tirocinio:
+  #tirocinio#
+
+subject_id:
+  #subject_id#
+
+cognome:
+  #cognome#
+
+nome:
+  #nome#
+
+genere:
+  #genere#
+
+luogo_nascita:
+  #luogo di nascita#
+
+data_nascita:
+  #data di nascita#
+
+curriculum:
+  #curriculum#
+
+approccio_colloquio:
+  #approccio al colloquio#
+
+linguaggio_pensiero:
+  #linguaggio_pensiero#
+
+adattabilità_motivazione:
+  #carattere_motivazione#
+
+conclusioni:
+  #conclusioni#
+
+altri_voti:
+  preselezione: #voto_presel#
+  test: #voto_test#
+  sport: #voto_sport#
+  prova_gruppo: #voto_gruppo#
+  conferenza: #voto_conferenza#
+  colloquio_perito: #voto_perito#
+
+voto_capo_gruppo_attitudinale:
+  #voto_capo#

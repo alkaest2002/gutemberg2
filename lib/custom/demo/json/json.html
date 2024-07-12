@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block style %}
+<style>
+    * {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        line-height: 15pt;
+    }
+</style>
+{% endblock %} {% block body %}
+<div class="page">
+    <div>{{ surname | upper }}</div>
+    <div>{{ name | upper }}</div>
+    <div>{{ fixed_value }}</div>
+    <div>{{ prop_a }}</div>
+    <div>{{ prop_b }}</div>
+    <div>{{ prop_c }}</div>
+</div>
+{% endblock %}

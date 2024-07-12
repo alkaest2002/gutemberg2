@@ -1,0 +1,161 @@
+{% extends "imas/_base/_base.html" %} {% block style %} {{super() }}
+<style>
+    table {
+        margin-top: 24pt;
+    }
+    table th {
+        font-weight: bold;
+    }
+
+    table th,
+    table td {
+        padding: 1px;
+    }
+
+    table tr:first-child th,
+    tr:first-child td {
+        border-top: 1px solid #333;
+    }
+
+    table tr:last-child th,
+    tr:last-child td {
+        border-bottom: 1px solid #333;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #eeeeee;
+    }
+
+    #table-bio {
+        width: 50%;
+    }
+
+    .table-center tr td,
+    .table-center tr th {
+        text-align: center;
+    }
+
+    .legend {
+        margin-top: 5px;
+        font-size: 0.8em;
+        font-style: italic;
+    }
+
+    .table-trials th,
+    .table-results th {
+        background-color: #ddd;
+    }
+
+    .table-results thead tr:first-child th:nth-child(4) {
+        border-top: 5px solid #000;
+        border-left: 5px solid #000;
+    }
+
+    .table-results thead tr:first-child th:nth-child(5) {
+        border-top: 5px solid #000;
+        border-right: 5px solid #000;
+    }
+
+    .table-results tbody tr:nth-child(1) td:nth-child(4),
+    .table-results tbody tr:nth-child(2) td:nth-child(4),
+    .table-results tbody tr:nth-child(3) td:nth-child(4) {
+        border-left: 5px solid #000;
+    }
+
+    .table-results tbody tr:last-child td:nth-child(4),
+    .table-results tbody tr:last-child td:nth-child(5),
+    .table-results tbody tr:last-child td:nth-child(6) {
+        border-bottom: 5px solid #000;
+    }
+
+    .table-results tbody tr:nth-child(1) td:last-child,
+    .table-results tbody tr:nth-child(2) td:last-child,
+    .table-results tbody tr:nth-child(3) td:last-child {
+        border-right: 5px solid #000;
+    }
+</style>
+{% endblock %} {% block body %}
+<div class="page">
+    {% with height_img='80px' %} {% include 'header_ima.html' %} {% endwith %}
+    <div class="text-center" style="margin-top: 24px">
+        <p class="text-bold">TEMPI DI REAZIONE</p>
+        <p>Specchio Riepilogativo</p>
+    </div>
+    <table id="table-bio">
+        <tr>
+            <th style="width: 150px">Cognome</th>
+            <td>{{ surname }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <td>{{ name }}</td>
+        </tr>
+        <tr>
+            <th>Data di nascita</th>
+            <td>{{ dob }}</td>
+        </tr>
+        <tr>
+            <th>Luogo di nascita</th>
+            <td>{{ pob }}</td>
+        </tr>
+    </table>
+    <table class="table-trials table-center" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Trial</th>
+                <th>Semplice (Ottico)</th>
+                <th>Semplice (Acustico)</th>
+                <th>Complesso</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trial in trials %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ trial['eye'] }}</td>
+                <td>{{ trial['ear'] }}</td>
+                <td>{{ trial['complex'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="legend">
+        Tutte le misurazioni sono espresse in millesimi di secondo.
+    </div>
+    <table class="table-results table-center" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Rapidità grezzo</th>
+                <th>Regolarità grezzo</th>
+                <th>Rapidità decile</th>
+                <th>Regolarità decile</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result['type'] }}</td>
+                <td>{{ result['rapidity_raw'] }}</td>
+                <td>{{ result['regularity_raw'] }}</td>
+                <td>{{ result['rapidity_std'] }}</td>
+                <td>{{ result['regularity'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="legend">
+        Le misurazioni grezze sono espresse in millesimi di secondo.
+    </div>
+    <div style="margin-top: 24pt">
+        ATTENZIONE: lo specchio riepilogativo riassume i dati presenti nei
+        documenti allegati (nr. 3).
+    </div>
+    <div id="location-date" style="margin-top: 12pt">
+        Milano, {{ document_date }}.
+    </div>
+    <div style="display: flex; justify-content: flex-end; margin-top: 6pt">
+        {% include 'signature.html' %}
+    </div>
+</div>
+{% endblock %}

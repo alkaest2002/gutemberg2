@@ -1,0 +1,104 @@
+{% extends "test/_base/_base.html" %} {% block style %} {{ super() }}
+<style>
+    @page {
+        margin: 2cm;
+
+        @bottom-center {
+            content: counter(page) " / " counter(pages);
+        }
+    }
+    @page:left {
+        @top-left {
+            content: "{{ booklet_title }}";
+            padding-top: 0.5cm;
+            font-size: 8pt;
+            font-style: italic;
+        }
+    }
+    @page:right {
+        @top-right {
+            content: "{{ booklet_title }}";
+            padding-top: 0.5cm;
+            font-size: 8pt;
+            font-style: italic;
+        }
+    }
+    @page:first {
+        @top-left {
+            content: "";
+        }
+
+        @top-right {
+            content: "";
+        }
+
+        @bottom-center {
+            content: "";
+        }
+    }
+    .item {
+        margin-bottom: 24pt;
+        break-inside: avoid;
+    }
+
+    .item-text td {
+        vertical-align: top;
+        font-weight: bold;
+    }
+
+    .item-text td:first-child {
+        width: 18pt;
+    }
+
+    .item-options table {
+        margin-top: 6pt;
+        margin-left: 18pt;
+    }
+
+    .item-options td {
+        vertical-align: top;
+        padding: 1pt;
+    }
+
+    .item-options td:first-child {
+        width: 14pt;
+    }
+</style>
+{% endblock %} {% block body %} {% if show_frontcover | default(True) %} {%
+include 'test/_base/front_cover.html' %} {% endif %} {% if show_instructions |
+default(True) %} {% include 'test/_base/instructions.html' %} {% endif %}
+<div id="items">
+    {% for item in booklet_items %}
+    <div class="item">
+        <div class="item-text">
+            <table>
+                <tr>
+                    <td>{{ loop.index }}.</td>
+                    <td>
+                        {{ item["item_text"] }} {% if show_info %} ({{
+                        item["area"] }}, {{ item["topic"] }}, item_id: {{
+                        item["item_id"] }}) {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="item-options">
+            <table>
+                {% for letter in "abcdefghi" %} {% if "option_" + letter in
+                item.keys() %}
+                <tr>
+                    <td>{{ letter | upper }}.</td>
+                    <td>
+                        {{ item["option_" + letter] }}{% if item["option_" +
+                        letter][-1] != "." %}.{% endif %} {% if
+                        show_correct_anwer %} {% if letter | upper ==
+                        item["correct"] %} ** {% endif %} {% endif %}
+                    </td>
+                </tr>
+                {% endif %} {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

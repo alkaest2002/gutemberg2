@@ -1,0 +1,87 @@
+{% extends "imas/_base/_base.html" %} {% block style %} {{ super() }}
+<style>
+    #interview > div {
+        margin-bottom: 24pt;
+    }
+    #interview > div > p:first-child {
+        font-weight: bold;
+        margin-bottom: 6pt;
+        padding-bottom: 6pt;
+        border-bottom: 1px solid #727272;
+    }
+</style>
+{% endblock %} {% block body %}
+<div>
+    {% with height_img='80px' %} {% include 'header_ima.html' %} {% endwith %}
+    <div id="interview" style="margin-top: 48pt">
+        <div>
+            <p>1. ANAGRAFICA VISITANDO</p>
+            <p>
+                {{ surname | upper }} {{ name | upper }}, nat{% if gender == "F"
+                %}a{% else %}o{% endif %} il {{ dob }} a {{ pob | upper }}.
+            </p>
+        </div>
+        <div>
+            <p>2. DATA, TIPO E MOTIVO DELLA VISITA</p>
+            <p>
+                Visita psicologica effettuata in data {{ document_date }} per il
+                seguente motivo: {{ reason_for_visit }}.
+            </p>
+        </div>
+        <div>
+            <p>3. PRECEDENTI ANAMNESTICI</p>
+            <p>{{ medical_history }}</p>
+        </div>
+        <div>
+            <p>4. COLLOQUIO</p>
+            {% if interview %}
+            <p>{{ interview }}.</p>
+            {% else %}
+            <p>
+                Il soggetto accede al colloquio ben disposto e con spirito di
+                fattiva collaborazione. Orientato nel tempo e nello spazio,
+                mnesico. Eloquio spontaneo fluido e organizzato sul piano
+                morfo-sintattico. Ideazione lucida, priva di tematiche
+                interferenti. Umore in asse. Nega rilevanti preoccupazioni
+                lavorative, familiari, finanziarie o di salute (sua o dei cari
+                più prossimi). Nega abuso di bevande alcoliche o uso di sostanze
+                psicotrope. Nega ideazione/comportamenti auto o etero-lesivi.
+                Alimentazione e sonno riferiti regolari.
+            </p>
+            {% endif %}
+        </div>
+        <div>
+            <p>5. RILIEVI TESTOLOGICI</p>
+            {% if tests %}
+            <p>{{ tests }}.</p>
+            {% else %} Nessun test somministrato. {% endif %}
+        </div>
+        <div>
+            <p>6. DIAGNOSI</p>
+            {% if diagnosis %}
+            <p>{{ diagnosis }}.</p>
+            {% else %}
+            <p>Assenza di elementi psicopatologici in atto.</p>
+            {% endif %}
+        </div>
+        <div>
+            <p>7. GIUDIZIO PROPOSTO</p>
+            {% if proposal %}
+            <p>{{ proposal }}.</p>
+            {% else %}
+            <p>Idone{% if gender == "M" %}o{% else %}a{% endif %}.</p>
+            {% endif %}
+        </div>
+        {% if advice %}
+        <div>
+            <p>8. CONSULENZA RICHIESTA</p>
+            <p>Diagnosi e giudizio in consultazione con {{ advice }}.</p>
+        </div>
+        {% endif %}
+    </div>
+    <div>Milano, {{ document_date }}.</div>
+    <div style="display: flex; justify-content: flex-end">
+        {% include 'signature.html' %}
+    </div>
+</div>
+{% endblock %}

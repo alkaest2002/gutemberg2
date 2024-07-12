@@ -1,0 +1,20 @@
+<div
+    id="front-cover"
+    class="page"
+    style="display: flex; justify-content: center; align-items: center"
+>
+    <div class="text-center">
+        {% with height_img = '400px' %} {% include 'coat_am.html' %} {% endwith
+        %}
+        <h1 style="font-size: 24pt; padding: 12px" class="text-bold">
+            Aeronautica Militare Italiana
+        </h1>
+        <h2 style="font-size: 18pt">
+            {{ booklet_title | default("QUESTIONARIO") | upper }}
+        </h2>
+        <h2 style="font-size: 12pt">con quesiti a risposta multipla</h2>
+        <h2 class="text-bold" style="font-size: 12pt; margin-top: 48pt">
+            ATTENZIONE: NON VOLTARE PAGINA
+        </h2>
+    </div>
+</div>

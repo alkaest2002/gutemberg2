@@ -1,0 +1,80 @@
+{% extends "imas/_base/_base.html" %} {% block style %} {{ super() }}
+<style>
+    @page {
+        padding: 1.5cm 3cm;
+    }
+</style>
+{% endblock %} {% block body %}
+<div>
+    {% with height_img='80px' %} {% include 'header_ima.html' %} {% endwith %}
+    <div style="margin-top: 24pt">
+        <div class="text-right" style="margin-bottom: 36pt">
+            <p>
+                Signor{% if gender == 'F' %}a{% endif %}
+                <span class="text-bold"
+                    >{{ surname | upper }} {{ name | upper }}</span
+                >
+            </p>
+            <p>
+                nat{% if gender == "F" %}a{% else %}o{% endif %} il
+                <span class="text-bold">{{ dob }}</span> a
+                <span class="text-bold">{{ pob | upper }}</span>
+            </p>
+        </div>
+        <table>
+            <tr>
+                <td style="padding-right: 6pt; vertical-align: top" rowspan="2">
+                    <span class="text-bold">Oggetto:</span>
+                </td>
+                <td>Richiesta documentazione sanitaria supplementare.</td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="padding-top: 18pt">
+                        Ai fini del giudizio di idoneità, in relazione alla
+                        tipologia della sua visita, è emersa la necessità di
+                        acquisire ulteriori elementi sanitari. Pertanto le
+                        chiediamo di produrre &mdash; in occasione della
+                        prossima visita presso questo Istituto &mdash; i sotto
+                        elencati documenti:
+                    </p>
+                    <ul>
+                        {% for exam in exams %}
+                        <li class="text-italic">
+                            {{ exam }}{% if loop.last %}.{% else %};{% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin: 12pt 0">
+        <p>Milano, {{ document_date }}</p>
+    </div>
+    <div style="display: flex; justify-content: flex-end">
+        {% include 'signature.html' %}
+    </div>
+    <div id="footer">
+        <div>
+            <p class="text-bold">Recapito dell'utente</p>
+            <p>{{ surname }} {{ name }}</p>
+            <p>{{ address }}</p>
+            <p>{{ city }}</p>
+            <p>{{ email }}</p>
+            <p>{{ phone }}</p>
+        </div>
+        <div
+            id="user-signature"
+            style="
+                height: 48pt;
+                margin-top: 24pt;
+                border-bottom: 1pt solid #000;
+                width: 50%;
+            "
+        >
+            <span class="text-bold">Firma dell'utente</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
