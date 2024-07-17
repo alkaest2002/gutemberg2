@@ -1,7 +1,7 @@
 {% extends "imas/_base/_base.html" %} {% block style %} {{ super() }}
 <style>
     #interview > div {
-        margin-bottom: 24pt;
+        margin-bottom: 12pt;
     }
     #interview > div > p:first-child {
         font-weight: bold;
@@ -38,15 +38,17 @@
             <p>{{ interview }}.</p>
             {% else %}
             <p>
-                Il soggetto accede al colloquio ben disposto e con spirito di
-                fattiva collaborazione. Orientato nel tempo e nello spazio,
-                mnesico. Eloquio spontaneo fluido e organizzato sul piano
+                Accede al colloquio ben dispost{% if gender == "F" %}a{% else
+                %}o{% endif %} e con spirito di fattiva collaborazione.
+                Orientat{% if gender == "F" %}a{% else %}o{% endif %} nel tempo
+                e nello spazio, mnesic{% if gender == "F" %}a{% else %}o{% endif
+                %}. Eloquio spontaneo fluido e organizzato sul piano
                 morfo-sintattico. Ideazione lucida, priva di tematiche
                 interferenti. Umore in asse. Nega rilevanti preoccupazioni
                 lavorative, familiari, finanziarie o di salute (sua o dei cari
                 più prossimi). Nega abuso di bevande alcoliche o uso di sostanze
-                psicotrope. Nega ideazione/comportamenti auto o etero-lesivi.
-                Alimentazione e sonno riferiti regolari.
+                psicotrope. Nega ideazione/comportamenti auto o
+                etero-lesivi.Alimentazione e sonno riferiti regolari.
             </p>
             {% endif %}
         </div>
