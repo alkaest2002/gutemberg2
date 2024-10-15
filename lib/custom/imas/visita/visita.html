@@ -17,15 +17,17 @@
         <div>
             <p>1. ANAGRAFICA VISITANDO</p>
             <p>
-                {{ surname | upper }} {{ name | upper }}, nat{% if gender == "F"
-                %}a{% else %}o{% endif %} il {{ dob }} a {{ pob | upper }}.
+                {{ surname | upper }} {{ name | upper }}{% if dob %}, nat{% if
+                gender == "F" %}a{% else %}o{% endif %} il {{ dob }} a {{ pob |
+                upper }}{% endif %}.
             </p>
         </div>
         <div>
             <p>2. DATA, TIPO E MOTIVO DELLA VISITA</p>
             <p>
-                Visita psicologica effettuata in data {{ document_date }} per il
-                seguente motivo: {{ reason_for_visit }}.
+                Visita psicologica effettuata in data {{ document_date }}{% if
+                reason_for_visit %} per il seguente motivo: {{ reason_for_visit
+                }}{% endif %}.
             </p>
         </div>
         <div>
@@ -47,8 +49,8 @@
                 interferenti. Umore in asse. Nega rilevanti preoccupazioni
                 lavorative, familiari, finanziarie o di salute (sua o dei cari
                 più prossimi). Nega abuso di bevande alcoliche o uso di sostanze
-                psicotrope. Nega ideazione/comportamenti auto o
-                etero-lesivi.Alimentazione e sonno riferiti regolari.
+                psicotrope. Nega ideazione/comportamenti auto o etero-lesivi.
+                Alimentazione e sonno riferiti regolari.
             </p>
             {% endif %}
         </div>

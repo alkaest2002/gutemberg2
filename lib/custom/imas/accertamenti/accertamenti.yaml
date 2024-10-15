@@ -46,7 +46,8 @@ base_esxams:
   - &medico certificato medico curante attestante il non uso di sostanze stupefacenti e il non abuso di alcool
   - &terapia_in_corso relazione aggiornata della psicoterapia in corso
   - &terapia_conclusa relazione di fine psicoterapia
-  - &assessment_psicologico assessment psicologico
+  - &assessment_psicologico inquadramento psicologico
+  - &assessment_psichiatrico inquadramento psichiatrico presso struttura pubblica
   - &tossicologico_completo screening tossicologico completo su matrice pilifera e urinaria
   - &tossicologico_urine screening tossicologico su matrice urinaria
   - &tossicologico_capello screening tossicologico su matrice pilifera
