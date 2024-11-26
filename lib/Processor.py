@@ -2,7 +2,6 @@ import json
 import yaml
 
 from typing import Callable, Self
-from pathlib import Path
 from lib.Filer import Filer
 from lib.DataLoader import DataLoader
 from lib.Renderer import Renderer
