@@ -55,7 +55,7 @@ class DataLoader(object):
             module_name = ".".join(["lib", "custom", *document["document_base_folder"].split("/"), "post_hoc"])
             # import module
             module = import_module(module_name)
-            # get pos_thoc function
+            # get post_hoc function
             process_data_fn = getattr(module, "process_data")
             # invoke post_hoc function
             document = process_data_fn(document)
