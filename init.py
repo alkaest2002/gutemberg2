@@ -14,13 +14,14 @@ parser.add_argument("-f", "--filetype", default="yaml", choices=["yaml", "json"]
 args = parser.parse_args()
 
 try:
-    # init filer
+    # Init filer
     filer = Filer()
-    # clone data template
+    # Clone data template
     filer.clone_template_file({"document_base_folder": args.template}, args.filetype)
-# on error
+
+# On error
 except Exception as e:
-    # notify error message
+    # Notify error message
     print(e)  # noqa: T201
-    # notify traceback
+    # Traceback
     TracebackNotifier(e).notify_traceback()
