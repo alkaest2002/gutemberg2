@@ -1,6 +1,6 @@
 import json
 from collections.abc import Callable
-from typing import Self
+from typing import Any, Self
 
 import yaml
 
@@ -27,8 +27,8 @@ class Processor:
         Returns:
             None
         """
-        self.filetype = filetype
-        self.parse_fn = parse_fn
+        self.filetype: str = filetype
+        self.parse_fn: Callable[[Any], Any] = parse_fn
 
     @classmethod
     def json_processor(cls) -> Self:
@@ -46,11 +46,11 @@ class Processor:
         """Process files and render documents."""
         try:
             # init Filer class
-            filer = Filer()
+            filer: Filer = Filer()
             # init DataLoader class
-            data_loader = DataLoader(filer, self.filetype, self.parse_fn)
+            data_loader: DataLoader = DataLoader(filer, self.filetype, self.parse_fn)
             # init Renderer class
-            renderer = Renderer(filer, data_loader)
+            renderer: Renderer = Renderer(filer, data_loader)
             # render document(s)
             renderer.render_documents()
         # on error

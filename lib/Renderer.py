@@ -1,3 +1,6 @@
+from pathlib import Path
+from typing import Any
+
 from weasyprint import HTML
 
 from lib import LIB_CUSTOM_PATH, jinja_env
@@ -24,8 +27,8 @@ class Renderer:
             None
         """
 
-        self.filer = filer
-        self.data_loader = data_loader
+        self.filer: Filer = filer
+        self.data_loader: DataLoader = data_loader
 
     def render_documents(self) -> None:
         """Render documents using Jinja templates and WeasyPrint.
@@ -33,20 +36,22 @@ class Renderer:
             None
         """
         # Get documents to render
-        documents_to_render = self.data_loader.load_documents()
+        documents_to_render: list[dict[str, Any]] = self.data_loader.load_documents()
+
         # Loop through documents to render
         for no_document, document in enumerate(documents_to_render, 1):
             # Notify number of documents to render
             print(no_document, "documents will be rendered of", len(documents_to_render), end="\r", flush=True)  # noqa: T201
             # Determine jinja template to load
-            template_to_get = self.filer.get_template_filepath(document, "html").relative_to(LIB_CUSTOM_PATH)
+            template_to_get: Path = self.filer.get_template_filepath(document, "html").relative_to(LIB_CUSTOM_PATH)
             # Load jinja template
-            jinja_template = jinja_env.get_template(str(template_to_get))
+            jinja_template: Any = jinja_env.get_template(str(template_to_get))
             # Render jinja template with current document
-            rendered_template = jinja_template.render(document)
+            rendered_template: str = jinja_template.render(document)
             # Determine output filepath
-            output_filepath = self.filer.get_folderpath("xerox") / f"{document['document_filename']}.pdf" # type: ignore
+            output_filepath: Path = self.filer.get_folderpath("xerox") / f"{document['document_filename']}.pdf" # type: ignore
             # Write rendered jinja template to output filepath
             HTML(string=rendered_template).write_pdf(output_filepath)
+
         # Notify end of rendering
         print("Rendering job is done.", len(documents_to_render), "processed document(s).")  # noqa: T201

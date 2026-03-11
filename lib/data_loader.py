@@ -3,6 +3,7 @@ from collections.abc import Callable
 from datetime import UTC, datetime
 from importlib import import_module
 from pathlib import Path
+from typing import Any
 
 from lib.filer import Filer
 
@@ -24,23 +25,24 @@ class DataLoader:
             filer (Filer): Filer instance to handle file operations.
             filetype (str): Type of files to process (e.g., "json").
             parse_fn (Callable): Function to parse file content into a list of documents.
+            optional_data (dict, optional): Optional data to enrich documents.
 
         Returns:
             None
         """
-        self.filer = filer
-        self.filetype = filetype
-        self.parse_fn = parse_fn
-        self.optional_data = self.get_optional_data_()
+        self.filer: Filer = filer
+        self.filetype: str = filetype
+        self.parse_fn: Callable = parse_fn
+        self.optional_data: dict[str, Any] = self.get_optional_data_()
 
-    def get_optional_data_(self) -> dict:
+    def get_optional_data_(self) -> dict[str, Any]:
         """Get optional data to enrich documents from an optional_data.json file in the current working directory.
 
         Returns:
             dict: Optional data to enrich documents, structured as a dictionary where keys are document base folders.
         """
         # Get optional data to enrich documents
-        optional_data_filepath = self.filer.get_folderpath("cwd") / "optional_data.json" # type: ignore
+        optional_data_filepath: Path = self.filer.get_folderpath("cwd") / "optional_data.json" # type: ignore
         # If optional data file exists
         if (optional_data_filepath).exists():
             # open optional data file
@@ -64,11 +66,11 @@ class DataLoader:
             dict: The enriched document with base data added.
         """
         # Get document_filename or None
-        document_filename = document.get("document_filename")
+        document_filename: str | None = document.get("document_filename")
         # Add document_filename (default to current file name & index)
         document["document_filename"] = document_filename or f"{filepath.stem}_{index}"
         # Get document_date or None
-        document_date = document.get("document_date")
+        document_date: str | None = document.get("document_date")
         # Add document_date (default to current date)
         document["document_date"] = (
             document_date or f"{datetime.now(UTC).strftime('%d/%m/%Y')}"
@@ -85,8 +87,10 @@ class DataLoader:
         Returns:
             dict: The enriched document with optional data added.
         """
+        # Get optional data for current document base folder or empty dict
+        optional_data: dict[str, Any] = self.optional_data.get(document["document_base_folder"], {})
         # Update document with optional data
-        document.update(self.optional_data.get(document["document_base_folder"], {}))
+        document.update(optional_data)
 
         return document
 
@@ -100,14 +104,14 @@ class DataLoader:
             dict: The processed document.
         """
         # Define post_hoc module path
-        post_hoc_path = (
+        post_hoc_path: Path = (
             self.filer.get_folderpath("lib_custom")
                 / Path(document["document_base_folder"]) / "post_hoc.py" # type: ignore
         )
         # If post_hoc module is present
         if post_hoc_path.exists():
             # Define module name
-            module_name = (
+            module_name: str = (
                 ".".join([
                     "lib",
                     "custom",
@@ -116,9 +120,9 @@ class DataLoader:
                 ])
             )
             # Importing module
-            module = import_module(module_name)
+            module: Any = import_module(module_name)
             # Get post_hoc function
-            process_data_fn = module.process_data
+            process_data_fn: Callable[[dict[str, Any]], dict[str, Any]] = module.process_data
             # Invoke post_hoc function
             document = process_data_fn(document)
 
@@ -131,19 +135,19 @@ class DataLoader:
             list[dict]: A list of processed and enriched documents.
         """
         # Init documents list
-        documents_list = []
+        documents_list: list[dict[str, Any]] = []
         # Loop through files to process
         for filepath in self.filer.get_files_to_process(self.filetype): # type: ignore
             # Open current file
             with filepath.open() as f_in:
                 # Parse its content (will contain list of documents)
-                documents = self.parse_fn(f_in)
+                documents: list[dict[str, Any]] = self.parse_fn(f_in)
                 # Loop through documents
                 for index, document in enumerate(documents, 1):
                     # If current document's template specification is valid
                     if self.filer.get_template_filepath(document, "html").exists():
                         # Add base data
-                        document = self.add_base_data_(document, filepath, index)
+                        document: dict[str, Any] = self.add_base_data_(document, filepath, index)
                         # Add optional data
                         document = self.add_optional_data_(document)
                         # Add post-process data
