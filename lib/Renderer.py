@@ -1,4 +1,3 @@
-from pathlib import Path
 from weasyprint import HTML
 from lib import jinja_env, LIB_CUSTOM_PATH
 from lib.Filer import Filer
