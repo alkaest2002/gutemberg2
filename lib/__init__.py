@@ -1,14 +1,14 @@
-import os
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-# constants
-BASE_PATH = Path(os.getcwd())
+# Constants
+BASE_PATH = Path.cwd()
 LIB_PATH = BASE_PATH / "lib"
 LIB_BASE_PATH = LIB_PATH / "_base"
 LIB_CUSTOM_PATH = LIB_PATH / "custom"
 
-# init jinja environment
+# Init Jinja environment
 jinja_env = Environment(
-    loader=FileSystemLoader([ LIB_BASE_PATH, LIB_CUSTOM_PATH ]))
+    loader=FileSystemLoader([ LIB_BASE_PATH, LIB_CUSTOM_PATH ])
+)

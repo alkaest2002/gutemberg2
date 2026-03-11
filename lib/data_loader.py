@@ -31,9 +31,9 @@ class DataLoader:
         self.filer = filer
         self.filetype = filetype
         self.parse_fn = parse_fn
-        self.optional_data = self.get_optional_data()
+        self.optional_data = self.get_optional_data_()
 
-    def get_optional_data(self) -> dict:
+    def get_optional_data_(self) -> dict:
         """Get optional data to enrich documents from an optional_data.json file in the current working directory.
 
         Returns:
@@ -52,7 +52,7 @@ class DataLoader:
             # Set it to an empty object
             return {}
 
-    def add_base_data(self, document: dict, filepath: Path, index: int) -> dict:
+    def add_base_data_(self, document: dict, filepath: Path, index: int) -> dict:
         """Add base data to document such as document filename and date.
 
         Args:
@@ -76,7 +76,7 @@ class DataLoader:
 
         return document
 
-    def add_optional_data(self, document: dict) -> dict:
+    def add_optional_data_(self, document: dict) -> dict:
         """Add optional data to document from the optional_data.json file.
 
         Args:
@@ -90,7 +90,7 @@ class DataLoader:
 
         return document
 
-    def post_hoc_process_document(self, document: dict) -> dict:
+    def post_hoc_process_document_(self, document: dict) -> dict:
         """Post-hoc process a document using a custom post_hoc.py module if it exists.
 
         Args:
@@ -143,11 +143,11 @@ class DataLoader:
                     # If current document's template specification is valid
                     if self.filer.get_template_filepath(document, "html").exists():
                         # Add base data
-                        document = self.add_base_data(document, filepath, index)
+                        document = self.add_base_data_(document, filepath, index)
                         # Add optional data
-                        document = self.add_optional_data(document)
+                        document = self.add_optional_data_(document)
                         # Add post-process data
-                        document = self.post_hoc_process_document(document)
+                        document = self.post_hoc_process_document_(document)
                         # Append document to documents list
                         documents_list.append(document)
                     # Otherwise

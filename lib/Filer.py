@@ -15,9 +15,9 @@ class Filer:
 
     def __init__(self) -> None:
         """Initialize Filer and set folder paths."""
-        self.folderpaths: dict = self.set_folderpaths()
+        self.folderpaths: dict = self.set_folderpaths_()
 
-    def set_folderpaths(self):
+    def set_folderpaths_(self):
         """Define and ensure existence of relevant folder paths.
 
         Returns:
