@@ -1,36 +1,54 @@
 from pathlib import Path
 
+
 class ValidationError(Exception):
   pass
 
 class NotFoundError(Exception):
   pass
 
-class TracebackNotifier():
+class TracebackNotifier:
+    """Class to notify error tracebacks in a readable format.
+
+    Attributes:
+        error (Exception): The error to notify the traceback of.
+    """
 
     def __init__(self, error):
-        # store error
+        """Initialize TracebackNotifier with an error.
+
+        Args:
+            error (Exception): The error to notify the traceback of.
+
+        Returns:
+            None
+        """
         self.error = error
 
     def notify_traceback(self):
+        """Notify the traceback of the stored error in a readable format.
+
+        Returns:
+            None
+        """
         try:
-            # get error's traceback
+            # Get error's traceback
             traceback = self.error.__traceback__
-            # consume traceback
+            # Consume traceback
             while traceback is not None:
-                # notify current traceback step
-                print(
+                # Notify current traceback step
+                print(  # noqa: T201
                     "-->",
                     Path(traceback.tb_frame.f_code.co_filename),
                     traceback.tb_frame.f_code.co_name,
                     "line code",
                     traceback.tb_lineno
                 , end="\n")
-                # get next traceback step
+                # Get next traceback step
                 traceback = traceback.tb_next
-        # on error
+        # On error
         except Exception as e:
-            # store error
+            # Store error
             self.error = e
-            # notify traceback
+            # Notify traceback
             self.notify_traceback()
