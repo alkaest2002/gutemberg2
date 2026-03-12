@@ -35,10 +35,12 @@ class Filer:
             "lib_base": LIB_BASE_PATH,
             "lib_custom": LIB_CUSTOM_PATH
         }
+
         # Ensure all relevant paths exist
         if all(f.exists() for f in folder_paths.values()):
             # Return relevant paths
             return folder_paths
+
         # Raise error, otherwise
         raise NotFoundError(f"Missing paths: {[ str(p) for p in folder_paths.values() if not p.exists() ]}.")
 
@@ -57,9 +59,11 @@ class Filer:
         # User requests all paths
         if folder_path == "all":
             return self.folderpaths
+
         # User requests specific path
         if folder_path in self.folderpaths:
             return self.folderpaths[folder_path]
+
         # Raise error, if user requests invalid path
         raise NotFoundError(f"'{folder_path}' doesn't exist.")
 
@@ -75,12 +79,14 @@ class Filer:
         """
         # Unpack area and template
         base_folder, base_template = document["document_base_folder"].split("/")
+
         # If filetype is html
         if filetype == "html":
             # Return html template filepath
             return (self.folderpaths["lib_custom"] / base_folder / base_template / f"{
                 document.get('jinja_template', base_template)
-            }.{filetype}")
+            }.html")
+
         # Otherwise, return json or yaml template filepath
         return (self.folderpaths["lib_custom"] / base_folder / base_template / f"{base_template}.{filetype}")
 
@@ -96,18 +102,23 @@ class Filer:
         """
         # Determine source template filepath
         source_filepath = self.get_template_filepath(document, filetype)
+
         # If template does not exist
         if not source_filepath.exists():
             # Raise error
             raise NotFoundError(f"{source_filepath} doesn't exist.")
+
         # Define source filename
         source_filename = source_filepath.name
+
         # Define destination filename
         destination_filename = f"{
             datetime.now(tz=UTC).strftime('%Y_%m_%d__%H%M%S')}__{
                 document['document_base_folder'].replace("/","_")}.{filetype}"
+
         # Clone template
         shutil.copy(source_filepath, self.folderpaths["data"])
+
         # Rename cloned template
         shutil.move(
             self.folderpaths["data"] / source_filename,
