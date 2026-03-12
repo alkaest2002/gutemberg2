@@ -40,16 +40,22 @@ class Renderer:
 
         # Loop through documents to render
         for no_document, document in enumerate(documents_to_render, 1):
+
             # Notify number of documents to render
-            print(no_document, "documents will be rendered of", len(documents_to_render), end="\r", flush=True)  # noqa: T201
+            print(no_document, " documents were rendered out of", len(documents_to_render), end="\r", flush=True)  # noqa: T201
+
             # Determine jinja template to load
             template_to_get: Path = self.filer.get_template_filepath(document, "html").relative_to(LIB_CUSTOM_PATH)
+
             # Load jinja template
             jinja_template: Any = jinja_env.get_template(str(template_to_get))
+
             # Render jinja template with current document
             rendered_template: str = jinja_template.render(document)
+
             # Determine output filepath
             output_filepath: Path = self.filer.get_folderpath("xerox") / f"{document['document_filename']}.pdf" # type: ignore
+
             # Write rendered jinja template to output filepath
             HTML(string=rendered_template).write_pdf(output_filepath)
 
