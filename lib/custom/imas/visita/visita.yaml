@@ -9,7 +9,7 @@ document_base_folder: imas/visita
 
 document_filename: #document name#
 
-documenta_date: #document date#
+document_date: #document date#
 
 ######################################################################
 # DATA
