@@ -1,9 +1,16 @@
-{% extends "concorsi/attitudinale/_base/_base.html" %} {% macro voto_hr(voto) %}
-{{
-["","uno","due","tre","quattro","cinque","sei","sette","otto","nove","dieci"][voto]
-}} {% endmacro %} {% macro voto_capo_gruppo_hr(voto) %} {{
-['','insufficiente','insufficiente','mediocre','mediocre','sufficiente','sufficiente','buono','buono','ottimo','ottimo'][voto]
-}} {% endmacro %} {% block style %} {{ super() }}
+{% extends "concorsi/attitudinale/_base/_base.html" %}
+{% macro voto_hr(voto) %}
+    {{
+        ["","uno","due","tre","quattro","cinque","sei","sette","otto","nove","dieci"][voto]
+    }} 
+{% endmacro %}
+{% macro voto_capo_gruppo_hr(voto) %}
+    {{
+        ["","insufficiente","insufficiente","mediocre","mediocre","sufficiente","sufficiente","buono","buono","ottimo","ottimo"][voto]
+    }}
+{% endmacro %}
+{% block style %}
+{{ super() }}
 <style>
     #header td:nth-child(2),
     #header td:nth-child(4) {
