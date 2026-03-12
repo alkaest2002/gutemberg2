@@ -33,29 +33,34 @@ class Processor:
     @classmethod
     def json_processor(cls) -> Self:
         """Initialize Processor class with json."""
-        # init Processor class with json
+        # Init Processor class with json
         return cls("json", json.load)
 
     @classmethod
     def yaml_processor(cls) -> Self:
         """Initialize Processor class with yaml."""
-        # init Processor class with yaml
+        # Init Processor class with yaml
         return cls("yaml", yaml.safe_load_all)
 
     def process_files(self) -> None:
         """Process files and render documents."""
         try:
-            # init Filer class
+            # Init Filer class
             filer: Filer = Filer()
-            # init DataLoader class
+
+            # Init DataLoader class
             data_loader: DataLoader = DataLoader(filer, self.filetype, self.parse_fn)
-            # init Renderer class
+
+            # Init Renderer class
             renderer: Renderer = Renderer(filer, data_loader)
-            # render document(s)
+
+            # Render document(s)
             renderer.render_documents()
-        # on error
+
+        # On error
         except Exception as e:
-            # notify error message
+            # Notify error message
             print(e)  # noqa: T201
-            # notify traceback
+
+            # Traceback
             TracebackNotifier(e).notify_traceback()
