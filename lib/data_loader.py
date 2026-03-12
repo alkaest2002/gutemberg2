@@ -43,15 +43,12 @@ class DataLoader:
         """
         # Get optional data to enrich documents
         optional_data_filepath: Path = self.filer.get_folderpath("cwd") / "optional_data.json" # type: ignore
-        # If optional data file exists
-        if (optional_data_filepath).exists():
-            # open optional data file
-            with optional_data_filepath.open() as f_in:
-                # load its content as json
+
+        # Try to open optional_data.json file and parse its content, otherwise return empty dict
+        try:
+            with optional_data_filepath.open("r") as f_in:
                 return json.load(f_in)
-        # Otherwise
-        else:
-            # Set it to an empty object
+        except FileNotFoundError:
             return {}
 
     def add_base_data_(self, document: dict, filepath: Path, index: int) -> dict:
@@ -67,10 +64,13 @@ class DataLoader:
         """
         # Get document_filename or None
         document_filename: str | None = document.get("document_filename")
+
         # Add document_filename (default to current file name & index)
         document["document_filename"] = document_filename or f"{filepath.stem}_{index}"
+
         # Get document_date or None
         document_date: str | None = document.get("document_date")
+
         # Add document_date (default to current date)
         document["document_date"] = (
             document_date or f"{datetime.now(UTC).strftime('%d/%m/%Y')}"
@@ -89,6 +89,7 @@ class DataLoader:
         """
         # Get optional data for current document base folder or empty dict
         optional_data: dict[str, Any] = self.optional_data.get(document["document_base_folder"], {})
+
         # Update document with optional data
         document.update(optional_data)
 
@@ -136,24 +137,34 @@ class DataLoader:
         """
         # Init documents list
         documents_list: list[dict[str, Any]] = []
+
         # Loop through files to process
         for filepath in self.filer.get_files_to_process(self.filetype): # type: ignore
+
             # Open current file
             with filepath.open() as f_in:
+
                 # Parse its content (will contain list of documents)
                 documents: list[dict[str, Any]] = self.parse_fn(f_in)
+
                 # Loop through documents
                 for index, document in enumerate(documents, 1):
+
                     # If current document's template specification is valid
                     if self.filer.get_template_filepath(document, "html").exists():
+
                         # Add base data
                         document: dict[str, Any] = self.add_base_data_(document, filepath, index)
+
                         # Add optional data
                         document = self.add_optional_data_(document)
+
                         # Add post-process data
                         document = self.post_hoc_process_document_(document)
+
                         # Append document to documents list
                         documents_list.append(document)
+
                     # Otherwise
                     else:
                         # Notify
