@@ -2,14 +2,9 @@
 {% block style %}
 {{ super() }}
     <style>
-        body {
-            font-size: 12pt;
-        }
-        @page {
-            padding: 1.5cm 3cm;
-        }
     </style>
-{% endblock %} {% block body %}
+{% endblock %}
+{% block body %}
 <div>
     {% with height_img='80px' %} {% include 'header_ima.html' %} {% endwith %}
     <div style="margin-top: 24pt">
