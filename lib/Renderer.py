@@ -42,7 +42,7 @@ class Renderer:
         for no_document, document in enumerate(documents_to_render, 1):
 
             # Notify number of documents to render
-            print(no_document, " documents were rendered out of", len(documents_to_render), end="\r", flush=True)  # noqa: T201
+            print(no_document, " documents were rendered out of ", len(documents_to_render), end="\r", flush=True)  # noqa: T201
 
             # Determine jinja template to load
             template_to_get: Path = self.filer.get_template_filepath(document, "html").relative_to(LIB_CUSTOM_PATH)
